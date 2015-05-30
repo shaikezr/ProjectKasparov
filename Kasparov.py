@@ -53,15 +53,13 @@ class GameBoard(object):
 			return 2 # 2 wins
 		else:
 			has_valid_move = False
-			i = 0
-			while i < 3 and not has_valid_move:
-				j = 0
-				while j < 3 and not has_valid_move:
+			for i in range(3):
+				for j in range(3):
 					if not self.is1(i,j) and not self.is2(i,j):
 						has_valid_move = True
-						break
-					j += 1
-				i+=1
+						break;
+				if has_valid_move:
+					break;
 			
 			if has_valid_move:
 				return 0 # keep going
