@@ -1,8 +1,10 @@
 #Players.py
 
-class HumanPlayer(object):
+class Player(object):
 	def __init__(self, number):
 		self.number = number
+
+class HumanPlayer(Player):
 	def get_move(self,board):
 		if self.number == 1:
 			print("Player 1 (o): \n")
@@ -30,3 +32,16 @@ class HumanPlayer(object):
 				continue
 		
 		return move
+
+import random	
+class RandomPlayer(Player): #just make random moves.
+	def get_move(self,board):
+		print("Making random move.")
+		while True: 
+			row = random.randint(0,2)
+			col = random.randint(0,2)
+			if not board.is1(row,col) and not board.is2(row,col):
+				break #if square is empty, make the move.
+		move = [row,col]
+		return move
+		

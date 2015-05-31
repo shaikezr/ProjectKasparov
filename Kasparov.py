@@ -139,6 +139,6 @@ class Game(object):
 			print("Something went wrong")
 		
 Player1 = Players.HumanPlayer(1)
-Player2 = Players.HumanPlayer(2)
+Player2 = Players.RandomPlayer(2)
 KaspGame = Game(Player1, Player2);
 KaspGame.play();
