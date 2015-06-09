@@ -150,3 +150,32 @@ class GameBoard(object):
 		
 Game = GameBoard();
 Game.play();
+
+#KasparovServer
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+
+class MachLearnHTTPReqHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        rootdir = str(input("what is the location of the file?"))      #if the filepath will be static, you can just enter the path here
+        try:
+            if self.path.endswith('html'):  #if the file is an html file open it, then send it top down
+                f = open(rootdir + self.path)
+                self.send_response(200)
+                self.send_header('Content-type','text-html')
+                self.end_headers()
+                self.wfile.write(f.read())
+                f.close()
+                return
+        except IOError: #If there's no file there, send this error
+            self.send_error(404, 'file not found')
+
+
+def run(self):
+    print("Server starting...")
+    server_address = ("127.0.0.1", 80)
+    httpd = HTTPServer(server_address, MachLearnHTTPReqHandler)
+    print('Server running...')
+    httpd.serve_forever()
+
+if __name__ == '__main__':
+    run()
