@@ -130,15 +130,18 @@ class Game(object):
 			
 		self.board.printboard();
 		if self.checkwin() == 1:
-			print("Player 1 wins")
+			self.player1.report_win()
+			self.player2.report_loss()
 		elif self.checkwin() == 2:
-			print("Player 2 wins")
+			self.player2.report_win()
+			self.player1.report_loss()
 		elif self.checkwin() == -1:
-			print("Draw")
+			self.player1.report_draw()
+			self.player2.report_draw()
 		else:
 			print("Something went wrong")
 		
-Player1 = Players.HumanPlayer(1)
+Player1 = Players.RandomPlayer(1)#Players.HumanPlayer(1)
 Player2 = Players.RandomPlayer(2)
 KaspGame = Game(Player1, Player2);
 KaspGame.play();
