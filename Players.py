@@ -4,7 +4,7 @@ class Player(object):
 	def __init__(self, number):
 		self.number = number
 	def report_win(self):
-		print("Player {0} wins".format(number))
+		print("Player {0} wins".format(self.number))
 	def report_loss(self):
 		pass
 	def report_draw(self):

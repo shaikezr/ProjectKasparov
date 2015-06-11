@@ -1,5 +1,7 @@
 import Kasparov
 
+
+
 class GeneticPlayer(Player):
 	def __init__(self,number,gene):
 		super().__init__(self,number)
