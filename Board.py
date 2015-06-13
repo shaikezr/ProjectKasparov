@@ -1,12 +1,11 @@
 import copy
 
 class GameBoard(object):
-	def __init__(self):
+	def __init__(self, board = None):
 		self.gameboard = [[0,0,0],[0,0,0],[0,0,0]]
-	
-	def __init__(self,board):
-		self.gameboard=copy.deepcopy(board)
-	
+		if not board == None:
+			self.gameboard=copy.deepcopy(board)
+		
 	def is1(self,row,col): #check if p1 has won
 		if self.gameboard[row][col] == 1:
 			return True

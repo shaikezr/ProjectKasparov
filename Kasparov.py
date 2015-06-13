@@ -6,7 +6,8 @@
 # Second mover will be 2
 
 import Players
-import GameBoard from Board
+from Board import GameBoard
+import Reinforce
 		
 class Game(object):
 	def __init__(self, Player1, Player2):
@@ -89,8 +90,10 @@ class Game(object):
 			self.player2.report_draw()
 		else:
 			print("Something went wrong")
-		
-Player1 = Players.RandomPlayer(1)#Players.HumanPlayer(1)
+
+			
+ReinforceInt = Reinforce.ReinforceInterface()
+Player1 = ReinforceInt.generate_reinforceplayer(1)
 Player2 = Players.RandomPlayer(2)
 KaspGame = Game(Player1, Player2);
 KaspGame.play();
