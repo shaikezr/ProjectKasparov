@@ -1,4 +1,5 @@
 import copy
+import boardutils
 
 class GameBoard(object):
 	def __init__(self, board = None):
@@ -47,6 +48,13 @@ class GameBoard(object):
 		print("+-----------+")
 		self.printrow(2)
 		print("+++++++++++++")
+		
+	def printboard_debug(self):
+		self.printboard()
+		encboard = boardutils.encode_board(self.gameboard)
+		print("encoded board={0}".format(encboard))
+		boardutils.decode_board(encboard,self.gameboard)
+		self.printboard()
 	
 	def makemove(self,turn,row,col):
 		self.gameboard[row][col] = turn

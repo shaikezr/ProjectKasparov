@@ -98,7 +98,7 @@ class Game(object):
 			self.player1.report_draw()
 			self.player2.report_draw()
 		else:
-			print("Something went wrong")
+			print("Something went wrong, checkwin is {0}".format(self.checkwin(self.board)))
 
 			
 ReinforceInt = Reinforce.ReinforceInterface()

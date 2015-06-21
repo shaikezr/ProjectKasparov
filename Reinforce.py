@@ -9,7 +9,14 @@ class ReinforcePlayer(Players.RandomPlayer): #access random move.
 		self.strat = strat
 		self.movehist = []
 	def encode_board(self,board):
-		#encode board position into unique int to work with strat.
+		#encode board position (list, not gameboard object) into unique int to work with strat.
+		encboard = 0;
+		for x in range(3):
+			for y in range(3):
+				encboard = encboard + (board[x][y]*(10**(x*3+y)))
+		pass
+	def decode_board(self,encboard):
+		
 		pass
 	def rotate90(self,board):
 		pass
