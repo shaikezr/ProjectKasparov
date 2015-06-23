@@ -50,10 +50,33 @@ class GameBoard(object):
 		print("+++++++++++++")
 		
 	def printboard_debug(self):
+		saveboard = self.gameboard
+		
+		print("original")
 		self.printboard()
-		encboard = boardutils.encode_board(self.gameboard)
-		print("encoded board={0}".format(encboard))
-		boardutils.decode_board(encboard,self.gameboard)
+		
+		print("rotate 90")
+		self.gameboard = boardutils.rotate90(saveboard)
+		self.printboard()
+		
+		print("rotate 180")
+		self.gameboard = boardutils.rotate180(saveboard)
+		self.printboard()
+		
+		print("rotate 270")
+		self.gameboard = boardutils.rotate270(saveboard)
+		self.printboard()
+		
+		print("reflect hrz")
+		self.gameboard = boardutils.reflecthrz(saveboard)
+		self.printboard()
+		
+		print("reflect vrt")
+		self.gameboard = boardutils.reflectvrt(saveboard)
+		self.printboard()
+		
+		self.gameboard = saveboard
+		print("back to original")
 		self.printboard()
 	
 	def makemove(self,turn,row,col):

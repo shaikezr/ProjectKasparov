@@ -39,4 +39,38 @@ def decode_board(encboard, decboard):
 			row.append(int(strboard[loc]))
 		decboard.append(row)
 	
+def rotcoord(coord,matrix):
+	new_x_coord=coord[0]*matrix[0][0] + coord[1]*matrix[1][0]
+	new_y_coord=coord[0]*matrix[0][1] + coord[1]*matrix[1][1]
+	return (new_x_coord,new_y_coord)
+
+def applymatrix(board,rotmatrix):
+	ret = [[0,0,0],[0,0,0],[0,0,0]]
+	for x in range(3):
+		for y in range(3):
+			newcoord = rotcoord((x-1,y-1),rotmatrix)
+			ret[newcoord[0]+1][newcoord[1]+1] = board[x][y]
+	return ret
+
+def rotate90(board):
+	rotmatrix=[(0,-1),(1,0)]
+	return applymatrix(board,rotmatrix)
+	
+	
+def rotate180(board):
+	rotmatrix=[(-1,0),(0,-1)]
+	return applymatrix(board,rotmatrix)
+	
+def rotate270(board):
+	rotmatrix=[(0,1),(-1,0)]
+	return applymatrix(board,rotmatrix)
+	
+def reflectvrt(board): #flip x-value
+	rotmatrix=[(-1,0),(0,1)]
+	return applymatrix(board,rotmatrix)
+	
+def reflecthrz(board): #flip y-value
+	rotmatrix=[(1,0),(0,-1)]
+	return applymatrix(board,rotmatrix)
+	
 	

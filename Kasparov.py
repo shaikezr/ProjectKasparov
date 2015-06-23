@@ -84,7 +84,7 @@ class Game(object):
 		
 	def play(self):
 		while self.checkwin(self.board) == 0:
-			self.board.printboard()
+			self.board.printboard_debug()
 			self.prompt_for_move()
 			
 		self.board.printboard();
