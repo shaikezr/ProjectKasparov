@@ -21,13 +21,13 @@ def encode_board(board):
 			encboard = encboard + board[x][y]*get_multiplier(x,y)
 	return encboard
 
-def decode_board(encboard, decboard):
+def decode_board(encboard):
 	#decodes a y-digit board integer into a board-list.
 	if not isinstance(decboard,list):
 		return
-	while len(decboard) > 0:
-		decboard.pop() #clean the board
-		
+	#while len(decboard) > 0:
+	#	decboard.pop() #clean the board
+	decboard = []
 	strboard = str(encboard) #use list comprehension to get the digit.
 	while len(strboard) < 9:
 		strboard = '0' + strboard
@@ -38,6 +38,7 @@ def decode_board(encboard, decboard):
 			loc = 8 - the_pow #1st digit would be in position 8
 			row.append(int(strboard[loc]))
 		decboard.append(row)
+	return decboard
 	
 def rotcoord(coord,matrix):
 	new_x_coord=coord[0]*matrix[0][0] + coord[1]*matrix[1][0]

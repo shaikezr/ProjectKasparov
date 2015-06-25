@@ -45,7 +45,7 @@ class ReinforcePlayer(Players.RandomPlayer): #access random move.
 			###############################################################
 			##### list is not hashable, so will need to strat with int.####
 			###############################################################
-			evaluations[newboard.gameboard]=(move,self.eval_board(newboard.gameboard))
+			evaluations[encboard(newboard.gameboard)]=(move,self.eval_board(newboard.gameboard))
 			
 		sorted_evals = sorted(evaluations.items(), key=operator.itemgetter(0))
 		best_eval = sorted_evals[len(sorted_evals) - 1][1] #sorted eval is a list of tuples
