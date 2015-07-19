@@ -1,0 +1,70 @@
+import itertools
+from Board import GameBoard
+import boardutils
+
+def removeImpossibles(arrayStates):
+#This function takes a list of the cartesian product of the 3 possible cell states. it returns a list of valid tic-tac-toe boards.
+    gameStates = []
+    xcounter = 0
+    ocounter = 0
+    for game in arrayStates: #counts x's and o's
+        for row in game:
+            for cell in row:
+                if cell == 1:
+                    xcounter+=1
+                elif cell == 2:
+                    ocounter+=2
+        if (xcounter <= 5 and ocounter <= 5) and (abs(xcounter-ocounter) <= 1): #appends a new list if
+            gameStates.append(game)
+        xcounter = 0
+        ocounter = 0
+    return gameStates
+
+def checkifvalid(game):
+    """this function checks if the game is a winner"""
+    #horiz
+    for i in range(3):
+        if game[i] == [1, 1, 1] or game[i] == [2, 2, 2]:
+            return False
+    #vert
+    for i in [1,2]:
+        if(
+            game[0][0] == i and game[1][0] == i and game[2][0] == i or
+            game[0][1] == i and game[1][1] == i and game[2][1] == i or
+            game[0][2] == i and game[1][2] == i and game[2][2] == i
+        ):
+            return False
+    #diag
+    for i in [1,2]:
+        if(
+            game[0][0] == i and game[1][1] == i and game[2][2] == i or
+            game[0][2] == i and game[1][1] == i and game[2][0] == i
+        ):
+            return False
+    return True
+
+def rawList2boards(rawList):
+    #this function converts a list of lists and returns the corresponding list of gameboard objects
+    boards = []
+    for game in rawList:
+        newBoard=GameBoard(board = game)
+        boards.append(newBoard)
+    return boards
+
+def removeRotations(boards):
+    newlist=[]
+    for game in range(len(boards)):
+        v = boardutils.rotate90(boards[game])
+        w = boardutils.rotate180(boards[game])
+        x = boardutils.rotate270(boards[game])
+        y = boardutils.reflectvrt(boards[game])
+        z = boardutils.reflecthrz(boards[game])
+        if v not in newlist and w not in newlist and x not in newlist and y not in newlist and z not in newlist:
+            newlist.append(boards[game])
+    return newlist
+
+rawMoves = [ [[a1,a2,a3],[a4,a5,a6],[a7,a8,a9]] for a1,a2,a3,a4,a5,a6,a7,a8,a9 in itertools.product(range(3),repeat=9)]
+gameStates = removeImpossibles(rawMoves)
+moveList = [ x for x in gameStates if checkifvalid(x) == True]
+finalMoveList = removeRotations(moveList)
+boardList = rawList2boards(finalMoveList)
